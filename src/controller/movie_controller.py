@@ -7,7 +7,7 @@ from src.schema.movie_schema import MovieCreate
 
 # Créer un film
 def create_movie(movie: MovieCreate, db: Session):
-    db_movie = Movie(**movie.dict())
+    db_movie = Movie(**movie.model_dump())
     db.add(db_movie)
     db.commit()
     db.refresh(db_movie)
