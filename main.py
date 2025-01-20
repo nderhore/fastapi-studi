@@ -1,13 +1,19 @@
 from fastapi import FastAPI
 
+from api.movie_api import MovieAPI
+from api.auth_api import router as auth_router
+from src.config.database import Base, engine
+
+# Création des tables
+Base.metadata.create_all(bind=engine)
+
+# Création de l'application FastAPI
 app = FastAPI()
 
+# Initialisation de l'API Movie
+movie_api = MovieAPI()
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+# Montage des routes de MovieAPI
+app.include_router(movie_api.router, prefix="/movies", tags=["Movies"])
 
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+app.include_router(auth_router,prefix="/auth", tags=["Auth"])
