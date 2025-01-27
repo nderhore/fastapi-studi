@@ -11,5 +11,4 @@ COPY . .
 # Installation des dependances
 RUN pip install --no-cache-dir -r ./requirements.txt
 
-# Exposer le port 8000
-EXPOSE 8000
+CMD ["python", "main.py"]
