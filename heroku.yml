@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: "uvicorn main:app --port 8000 --reload"
+  web: "uvicorn main:app --reload"
